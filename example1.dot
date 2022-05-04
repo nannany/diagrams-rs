@@ -1,0 +1,10 @@
+digraph example3 {
+    N0[label="{x,y}"];
+    N1[label="{x}"];
+    N2[label="{y}"];
+    N3[label="{}"];
+    N0 -> N1[label="&sube;"];
+    N0 -> N2[label="&sube;"];
+    N1 -> N3[label="&sube;"];
+    N2 -> N3[label="&sube;"];
+}
