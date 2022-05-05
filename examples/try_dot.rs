@@ -1,7 +1,7 @@
 use std::io::Write;
 
-type Nd<'a> = (usize, &'a str);
-type Ed<'a> = (Nd<'a>, Nd<'a>);
+type Nd<'a> = (usize, &'a str); // nodeを表現しているっぽい
+type Ed<'a> = (Nd<'a>, Nd<'a>); // edgeを表現しているっぽい
 struct Graph { nodes: Vec<&'static str>, edges: Vec<(usize,usize)> }
 
 pub fn render_to<W: Write>(output: &mut W) {
@@ -12,6 +12,7 @@ pub fn render_to<W: Write>(output: &mut W) {
     dot::render(&graph, output).unwrap()
 }
 
+/// 識別子を振ったり、ラベルを貼り付けたりするtraitっぽい。Labellerは。
 impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
     fn graph_id(&'a self) -> dot::Id<'a> { dot::Id::new("example3").unwrap() }
     fn node_id(&'a self, n: &Nd<'a>) -> dot::Id<'a> {
@@ -26,6 +27,7 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
     }
 }
 
+/// nodeとedgeの位置関係を把握するために必要なtraitと理解。
 impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
     fn nodes(&'a self) -> dot::Nodes<'a,Nd<'a>> {
         self.nodes.iter().map(|s| &s[..]).enumerate().collect()
@@ -36,6 +38,7 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
                           (j, &self.nodes[j][..])))
             .collect()
     }
+    /// どっちからどっちの矢印を出すかという話
     fn source(&self, e: &Ed<'a>) -> Nd<'a> { e.0 }
     fn target(&self, e: &Ed<'a>) -> Nd<'a> { e.1 }
 }
