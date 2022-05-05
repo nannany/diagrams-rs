@@ -1,6 +1,6 @@
 digraph example3 {
     N0[label="{x,y}"];
-    N1[label="{x}"];
+    N1[label="{x}",image="assets/aws/business/chime.png"];
     N2[label="{y}"];
     N3[label="{}"];
     N0 -> N1[label="&sube;"];
