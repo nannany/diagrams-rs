@@ -1,5 +1,3 @@
-use std::io::Write;
-
 use diagrams_rs::graph::Graph;
 
 fn main() {
@@ -8,7 +6,7 @@ fn main() {
 
     let nodes = vec!("{x,y}", "{x}", "{y}", "{}");
     let edges = vec!((0, 1), (0, 2), (1, 3), (2, 3));
-    let mut graph = Graph { nodes, edges };
+    let graph = Graph { nodes, edges };
 
     graph.render_to( &mut f);
 }

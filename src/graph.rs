@@ -43,10 +43,7 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
 
 impl Graph {
     pub fn render_to<W: Write>(&self, output: &mut W) {
-        let nodes = vec!("{x,y}", "{x}", "{y}", "{}");
-        let edges = vec!((0, 1), (0, 2), (1, 3), (2, 3));
-        let graph = Graph { nodes: nodes, edges: edges };
 
-        dot::render(&graph, output).unwrap()
+        dot::render(self, output).unwrap()
     }
 }
