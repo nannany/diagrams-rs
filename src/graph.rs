@@ -5,10 +5,14 @@ type Nd<'a> = (usize, &'a str, &'a str);
 // edgeを表現
 type Ed<'a> = (Nd<'a>, Nd<'a>);
 
-type Node<'a> = (&'a str, &'a str);
+trait Node {
+    fn label(&self) -> &str;
 
-pub struct Graph<'a> {
-    pub nodes: Vec<&'a Node<'a>>,
+    fn image_path(&self) -> &str;
+}
+
+pub struct Graph {
+    pub nodes: Vec<dyn Node>,
     pub edges: Vec<(usize, usize)>,
 }
 
