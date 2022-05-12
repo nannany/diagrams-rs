@@ -25,18 +25,22 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
         dot::Id::new(format!("N{}", n.0)).unwrap()
     }
     fn node_label<'b>(&'b self, n: &Nd<'b>) -> dot::LabelText<'b> {
-        let &(i, _, _) = n;
+        let &(i, _, _) = n; // nodeのIDとlistの順番が同じ前提
         dot::LabelText::LabelStr(self.nodes[i].into())
     }
     fn edge_label<'b>(&'b self, _: &Ed<'b>) -> dot::LabelText<'b> {
-        dot::LabelText::LabelStr("aaaa".into())
+        dot::LabelText::LabelStr("edge".into())
     }
 }
 
 /// nodeとedgeの位置関係を把握するために必要なGraphWalkを実装
 impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
     fn nodes(&'a self) -> dot::Nodes<'a, Nd<'a>> {
-        self.nodes.iter().map(|s| &s[..]).enumerate().collect()
+        self.nodes
+            .iter()
+            .map(|node| (node.label(), node.image_path()))
+            .enumerate()
+            .collect()
     }
     fn edges(&'a self) -> dot::Edges<'a, Ed<'a>> {
         self.edges
