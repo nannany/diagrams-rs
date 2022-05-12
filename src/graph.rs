@@ -19,7 +19,7 @@ pub struct Graph {
 /// 識別子を振ったり、ラベルを貼り付けたりするLabellerを実装
 impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
     fn graph_id(&'a self) -> dot::Id<'a> {
-        dot::Id::new("example3").unwrap()
+        dot::Id::new("my_graph").unwrap()
     }
     fn node_id(&'a self, n: &Nd<'a>) -> dot::Id<'a> {
         dot::Id::new(format!("N{}", n.0)).unwrap()
