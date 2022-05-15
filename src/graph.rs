@@ -1,7 +1,7 @@
 use std::io::Write;
 
 // nodeを表現
-type Nd<'a> = (usize, &'a str, &'a str);
+type Nd<'a> = (usize, (&'a str, &'a str));
 // edgeを表現
 type Ed<'a> = (Nd<'a>, Nd<'a>);
 
@@ -25,7 +25,7 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
         dot::Id::new(format!("N{}", n.0)).unwrap()
     }
     fn node_label<'b>(&'b self, n: &Nd<'b>) -> dot::LabelText<'b> {
-        let &(i, _, _) = n; // nodeのIDとlistの順番が同じ前提
+        let &(i, (_, _)) = n; // nodeのIDとlistの順番が同じ前提
         dot::LabelText::LabelStr(self.nodes[i].label().into())
     }
     fn edge_label<'b>(&'b self, _: &Ed<'b>) -> dot::LabelText<'b> {
