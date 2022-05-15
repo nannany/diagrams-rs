@@ -45,7 +45,7 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
     fn edges(&'a self) -> dot::Edges<'a, Ed<'a>> {
         self.edges
             .iter()
-            .map(|&(i, j)| ((i, &self.nodes[i][..]), (j, &self.nodes[j][..])))
+            .map(|&(i, j)| ((i, vec![&self.nodes[i]]), (j, vec![&self.nodes[j]])))
             .collect()
     }
     /// どっちからどっちの矢印を出すかという話
