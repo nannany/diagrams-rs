@@ -45,7 +45,18 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
     fn edges(&'a self) -> dot::Edges<'a, Ed<'a>> {
         self.edges
             .iter()
-            .map(|&(i, j)| ((i, vec![&self.nodes[i]]), (j, vec![&self.nodes[j]])))
+            .map(|&(i, j)| {
+                (
+                    (
+                        i,
+                        (&self.nodes[i].label()[..], &self.nodes[i].image_path()[..]),
+                    ),
+                    (
+                        j,
+                        (&self.nodes[j].label()[..], &self.nodes[j].image_path()[..]),
+                    ),
+                )
+            })
             .collect()
     }
     /// どっちからどっちの矢印を出すかという話
