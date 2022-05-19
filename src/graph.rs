@@ -5,7 +5,7 @@ type Nd<'a> = (usize, (&'a str, &'a str));
 // edgeを表現
 type Ed<'a> = (Nd<'a>, Nd<'a>);
 
-trait Node {
+pub trait Node {
     fn label(&self) -> &str;
 
     fn image_path(&self) -> &str;
