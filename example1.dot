@@ -1,10 +1,10 @@
-digraph example3 {
-    N0[label="{x,y}"];
-    N1[label="{x}"];
-    N2[label="{y}"];
-    N3[label="{}"];
-    N0 -> N1[label="aaaa"];
-    N0 -> N2[label="aaaa"];
-    N1 -> N3[label="aaaa"];
-    N2 -> N3[label="aaaa"];
+digraph my_graph {
+    N0[label="aaa"];
+    N1[label="bbb"];
+    N2[label="ccc"];
+    N3[label="ddd"];
+    N0 -> N1[label="edge"];
+    N0 -> N2[label="edge"];
+    N1 -> N3[label="edge"];
+    N2 -> N3[label="edge"];
 }
