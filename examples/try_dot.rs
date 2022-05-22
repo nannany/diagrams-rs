@@ -1,6 +1,7 @@
-use diagrams_rs::graph::{Graph, Node};
 use std::env;
 use std::path::Path;
+
+use diagrams_rs::graph::{Graph, Node};
 
 fn main() {
     use std::fs::File;
@@ -8,10 +9,10 @@ fn main() {
 
     let mut nodes = Vec::<Box<dyn Node>>::new();
 
-    nodes.push(Box::new(Alb { label: "aaa" }));
-    nodes.push(Box::new(Alb { label: "bbb" }));
-    nodes.push(Box::new(Alb { label: "ccc" }));
-    nodes.push(Box::new(Alb { label: "ddd" }));
+    nodes.push(Box::new(Alb::new("aaa")));
+    nodes.push(Box::new(Alb::new("bbb")));
+    nodes.push(Box::new(Alb::new("ccc")));
+    nodes.push(Box::new(Alb::new("ddd")));
     let edges = vec![(0, 1), (0, 2), (1, 3), (2, 3)];
     let graph = Graph { nodes, edges };
 
@@ -29,20 +30,31 @@ fn main() {
 
 struct Alb<'a> {
     label: &'a str,
+    path: &'a str,
+}
+
+impl Alb<'_> {
+    fn init(&mut self, label: &str) -> Self {
+        let path = Path::new("assets/aws/network/elb-application-load-balancer.png");
+        let pwd = env::current_dir().unwrap();
+        let absolute_path = pwd.join(path);
+        let temp_path = match absolute_path.to_str() {
+            None => panic!("new path is not a valid UTF-8 sequence"),
+            Some(s) => s,
+        };
+
+        let path: &str = temp_path;
+
+        Alb { label, path }
+    }
 }
 
 impl Node for Alb<'_> {
     fn label(&self) -> &str {
-        &self.label
+        self.label
     }
 
-    fn image_path(&self) -> String {
-        let path = Path::new("assets/aws/network/elb-application-load-balancer.png");
-        let pwd = env::current_dir().unwrap();
-        let absolute_path = pwd.join(path);
-        match absolute_path.to_str() {
-            None => panic!("new path is not a valid UTF-8 sequence"),
-            Some(s) => s.to_string(),
-        }
+    fn image_path(&self) -> &str {
+        self.path
     }
 }

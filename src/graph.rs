@@ -1,14 +1,14 @@
 use std::io::Write;
 
 // nodeを表現
-type Nd<'a> = (usize, (&'a str, String));
+type Nd<'a> = (usize, (&'a str, &'a str));
 // edgeを表現
 type Ed<'a> = (Nd<'a>, Nd<'a>);
 
 pub trait Node {
     fn label(&self) -> &str;
 
-    fn image_path(&self) -> String;
+    fn image_path(&self) -> &str;
 }
 
 pub struct Graph {
