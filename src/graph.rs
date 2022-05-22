@@ -47,8 +47,8 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
             .iter()
             .map(|&(i, j)| {
                 (
-                    (i, (&self.nodes[i].label()[..], &self.nodes[i].image_path())),
-                    (j, (&self.nodes[j].label()[..], &self.nodes[j].image_path())),
+                    (i, (self.nodes[i].label(), self.nodes[i].image_path())),
+                    (j, (self.nodes[j].label(), self.nodes[j].image_path())),
                 )
             })
             .collect()
