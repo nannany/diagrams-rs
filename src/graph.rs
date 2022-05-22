@@ -1,14 +1,14 @@
 use std::io::Write;
 
 // nodeを表現
-type Nd<'a> = (usize, (&'a str, &'a str));
+type Nd<'a> = (usize, (&'a str, String));
 // edgeを表現
 type Ed<'a> = (Nd<'a>, Nd<'a>);
 
 pub trait Node {
     fn label(&self) -> &str;
 
-    fn image_path(&self) -> &str;
+    fn image_path(&self) -> String;
 }
 
 pub struct Graph {
@@ -26,7 +26,7 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
     }
     fn node_label<'b>(&'b self, n: &Nd<'b>) -> dot::LabelText<'b> {
         let &(i, (_, _)) = n; // nodeのIDとlistの順番が同じ前提
-        dot::LabelText::LabelStr(self.nodes[i].label().into())
+        dot::LabelText::LabelStr(self.nodes[i].image_path().into())
     }
     fn edge_label<'b>(&'b self, _: &Ed<'b>) -> dot::LabelText<'b> {
         dot::LabelText::LabelStr("edge".into())
@@ -47,14 +47,8 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
             .iter()
             .map(|&(i, j)| {
                 (
-                    (
-                        i,
-                        (&self.nodes[i].label()[..], &self.nodes[i].image_path()[..]),
-                    ),
-                    (
-                        j,
-                        (&self.nodes[j].label()[..], &self.nodes[j].image_path()[..]),
-                    ),
+                    (i, (&self.nodes[i].label()[..], &self.nodes[i].image_path())),
+                    (j, (&self.nodes[j].label()[..], &self.nodes[j].image_path())),
                 )
             })
             .collect()
