@@ -1,6 +1,7 @@
 use std::env;
 use std::path::Path;
 
+use diagrams_rs::global::LARGE_TEXT;
 use diagrams_rs::graph::{Graph, Node};
 
 fn main() {
@@ -16,15 +17,6 @@ fn main() {
     let edges = vec![(0, 1), (0, 2), (1, 3), (2, 3)];
     let graph = Graph { nodes, edges };
 
-    let path = Path::new("assets/aws/network/elb-application-load-balancer.png");
-    let pwd = env::current_dir().unwrap();
-    let absolute_path = pwd.join(path);
-    // パスを文字列のスライスに変換する。
-    match absolute_path.to_str() {
-        None => panic!("new path is not a valid UTF-8 sequence"),
-        Some(s) => println!("new path is {}", s),
-    }
-
     graph.render_to(&mut f);
 }
 
@@ -34,18 +26,11 @@ struct Alb<'a> {
 }
 
 impl Alb<'_> {
-    fn init(&mut self, label: &str) -> Self {
-        let path = Path::new("assets/aws/network/elb-application-load-balancer.png");
-        let pwd = env::current_dir().unwrap();
-        let absolute_path = pwd.join(path);
-        let temp_path = match absolute_path.to_str() {
-            None => panic!("new path is not a valid UTF-8 sequence"),
-            Some(s) => s,
-        };
-
-        let path: &str = temp_path;
-
-        Alb { label, path }
+    fn new(label: &str) -> Alb {
+        Alb {
+            label,
+            path: "assets/aws/network/elb-application-load-balancer.png",
+        }
     }
 }
 

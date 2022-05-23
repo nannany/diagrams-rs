@@ -7,6 +7,7 @@ name = "diagrams-rs"
 version = "0.1.0"
 dependencies = [
  "dot",
+ "once_cell",
 ]
 
 [[package]]
@@ -14,3 +15,9 @@ name = "dot"
 version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a74b6c4d4a1cff5f454164363c16b72fa12463ca6b31f4b5f2035a65fa3d5906"
+
+[[package]]
+name = "once_cell"
+version = "1.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7b10983b38c53aebdf33f542c6275b0f58a238129d00c4ae0e6fb59738d783ca"

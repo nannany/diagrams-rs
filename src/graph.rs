@@ -1,5 +1,7 @@
 use std::io::Write;
 
+use crate::global::LARGE_TEXT;
+
 // nodeを表現
 type Nd<'a> = (usize, (&'a str, &'a str));
 // edgeを表現
@@ -26,7 +28,11 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
     }
     fn node_label<'b>(&'b self, n: &Nd<'b>) -> dot::LabelText<'b> {
         let &(i, (_, _)) = n; // nodeのIDとlistの順番が同じ前提
-        dot::LabelText::LabelStr(self.nodes[i].image_path().into())
+                              // dot::LabelText::LabelStr(self.nodes[i].image_path().into())
+        let mut absolute_image_path = String::new();
+        absolute_image_path.push_str(LARGE_TEXT.as_str());
+        absolute_image_path.push_str(self.nodes[i].image_path());
+        dot::LabelText::HtmlStr(absolute_image_path.into())
     }
     fn edge_label<'b>(&'b self, _: &Ed<'b>) -> dot::LabelText<'b> {
         dot::LabelText::LabelStr("edge".into())

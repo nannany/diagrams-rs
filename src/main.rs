@@ -1,4 +1,3 @@
 mod graph;
 
-fn main() {
-}
+fn main() {}
