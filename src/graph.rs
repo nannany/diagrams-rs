@@ -31,8 +31,13 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
                               // dot::LabelText::LabelStr(self.nodes[i].image_path().into())
         let mut absolute_image_path = String::new();
         absolute_image_path.push_str(LARGE_TEXT.as_str());
+        absolute_image_path.push_str("/");
         absolute_image_path.push_str(self.nodes[i].image_path());
-        dot::LabelText::HtmlStr(absolute_image_path.into())
+        let mut html_string = String::new();
+        html_string.push_str(r#"<TABLE><TR><TD><IMG SRC=""#);
+        html_string.push_str(absolute_image_path.as_str());
+        html_string.push_str(r#""/></TD></TR></TABLE>"#);
+        dot::LabelText::HtmlStr(html_string.into())
     }
     fn edge_label<'b>(&'b self, _: &Ed<'b>) -> dot::LabelText<'b> {
         dot::LabelText::LabelStr("edge".into())
