@@ -1,3 +1,4 @@
+use dot::GraphWalk;
 use std::io::Write;
 
 use crate::global::LARGE_TEXT;
@@ -33,15 +34,20 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
         absolute_image_path.push_str(LARGE_TEXT.as_str());
         absolute_image_path.push_str("/");
         absolute_image_path.push_str(self.nodes[i].image_path());
-        let mut html_string = String::new();
-        html_string.push_str(r#"<TABLE><TR><TD><IMG SRC=""#);
-        html_string.push_str(absolute_image_path.as_str());
-        html_string.push_str(r#""/></TD></TR></TABLE>"#);
+        let mut html_string =
+            build_html_string(absolute_image_path.as_str(), self.nodes[i].label());
         dot::LabelText::HtmlStr(html_string.into())
     }
     fn edge_label<'b>(&'b self, _: &Ed<'b>) -> dot::LabelText<'b> {
         dot::LabelText::LabelStr("edge".into())
     }
+}
+
+fn build_html_string(path: &str, text: &str) -> String {
+    format!(
+        "<TABLE><TR><TD><IMG SRC=\"{}\"/></TD><TD>{}</TD></TR></TABLE>",
+        path, text
+    )
 }
 
 /// nodeとedgeの位置関係を把握するために必要なGraphWalkを実装
