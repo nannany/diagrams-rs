@@ -1,6 +1,7 @@
-use dot::GraphWalk;
 use std::fs::File;
 use std::io::Write;
+
+use dot::GraphWalk;
 
 use crate::global::LARGE_TEXT;
 
@@ -51,8 +52,9 @@ fn build_html_string(path: &str, text: &str) -> String {
     )
 }
 
-/// nodeとedgeの位置関係を把握するために必要なGraphWalkを実装
+/// Implement GraphWalk required to understand the relationship between node and edge location
 impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
+    // impl dot::Nodes which lists nodes
     fn nodes(&'a self) -> dot::Nodes<'a, Nd<'a>> {
         self.nodes
             .iter()
@@ -60,6 +62,7 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
             .enumerate()
             .collect()
     }
+    // impl dot::Edges which lists edges
     fn edges(&'a self) -> dot::Edges<'a, Ed<'a>> {
         self.edges
             .iter()
