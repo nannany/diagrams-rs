@@ -1,6 +1,8 @@
 use std::env;
 use std::path::Path;
 
+use diagrams_rs::aws::alb;
+use diagrams_rs::aws::alb::Alb;
 use diagrams_rs::global::LARGE_TEXT;
 use diagrams_rs::graph::{Graph, Node};
 
@@ -18,28 +20,4 @@ fn main() {
     let graph = Graph { nodes, edges };
 
     graph.render_to(&mut f);
-}
-
-struct Alb<'a> {
-    label: &'a str,
-    path: &'a str,
-}
-
-impl Alb<'_> {
-    fn new(label: &str) -> Alb {
-        Alb {
-            label,
-            path: "assets/aws/network/elb-application-load-balancer.png",
-        }
-    }
-}
-
-impl Node for Alb<'_> {
-    fn label(&self) -> &str {
-        self.label
-    }
-
-    fn image_path(&self) -> &str {
-        self.path
-    }
 }
