@@ -8,8 +8,6 @@ use diagrams_rs::graph::{Graph, Node};
 
 fn main() {
     use std::fs::File;
-    let mut f = File::create("example1.dot").unwrap();
-
     let mut nodes = Vec::<Box<dyn Node>>::new();
 
     nodes.push(Box::new(Alb::new("aaa")));
@@ -19,5 +17,5 @@ fn main() {
     let edges = vec![(0, 1), (0, 2), (1, 3), (2, 3)];
     let graph = Graph { nodes, edges };
 
-    graph.render_to(&mut f);
+    graph.render_to("mydot.dot");
 }

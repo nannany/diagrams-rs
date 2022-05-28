@@ -1,4 +1,5 @@
 use dot::GraphWalk;
+use std::fs::File;
 use std::io::Write;
 
 use crate::global::LARGE_TEXT;
@@ -80,7 +81,8 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
 }
 
 impl Graph {
-    pub fn render_to<W: Write>(&self, output: &mut W) {
-        dot::render(self, output).unwrap()
+    pub fn render_to(&self, file_name: &str) {
+        let mut f = File::create(file_name).unwrap();
+        dot::render(self, &mut f).unwrap()
     }
 }
