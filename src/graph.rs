@@ -1,7 +1,5 @@
 use std::fs::File;
-use std::io::Write;
 
-use dot::GraphWalk;
 
 use crate::global::LARGE_TEXT;
 
@@ -16,13 +14,13 @@ pub trait Node {
     fn image_path(&self) -> &str;
 }
 
-pub struct Graph {
+pub struct Diagram {
     pub nodes: Vec<Box<dyn Node>>,
     pub edges: Vec<(usize, usize)>,
 }
 
 /// 識別子を振ったり、ラベルを貼り付けたりするLabellerを実装
-impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
+impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Diagram {
     fn graph_id(&'a self) -> dot::Id<'a> {
         dot::Id::new("my_graph").unwrap()
     }
@@ -31,12 +29,12 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Graph {
     }
     fn node_label<'b>(&'b self, n: &Nd<'b>) -> dot::LabelText<'b> {
         let &(i, (_, _)) = n; // nodeのIDとlistの順番が同じ前提
-                              // dot::LabelText::LabelStr(self.nodes[i].image_path().into())
+        // dot::LabelText::LabelStr(self.nodes[i].image_path().into())
         let mut absolute_image_path = String::new();
         absolute_image_path.push_str(LARGE_TEXT.as_str());
         absolute_image_path.push_str("/");
         absolute_image_path.push_str(self.nodes[i].image_path());
-        let mut html_string =
+        let html_string =
             build_html_string(absolute_image_path.as_str(), self.nodes[i].label());
         dot::LabelText::HtmlStr(html_string.into())
     }
@@ -53,7 +51,7 @@ fn build_html_string(path: &str, text: &str) -> String {
 }
 
 /// Implement GraphWalk required to understand the relationship between node and edge location
-impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
+impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Diagram {
     // impl dot::Nodes which lists nodes
     fn nodes(&'a self) -> dot::Nodes<'a, Nd<'a>> {
         self.nodes
@@ -83,7 +81,7 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Graph {
     }
 }
 
-impl Graph {
+impl Diagram {
     pub fn render_to(&self, file_name: &str) {
         let mut f = File::create(file_name).unwrap();
         dot::render(self, &mut f).unwrap()
