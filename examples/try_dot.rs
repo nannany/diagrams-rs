@@ -10,7 +10,7 @@ fn main() {
     nodes.push(Box::new(Alb::new("ccc")));
     nodes.push(Box::new(Alb::new("ddd")));
     let edges = vec![(0, 1), (0, 2), (1, 3), (2, 3)];
-    let graph = Diagram { nodes, edges };
+    let diagram = Diagram { nodes, edges };
 
-    graph.render_to("mydot.dot");
+    diagram.render_to("mydot.dot");
 }
