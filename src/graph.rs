@@ -1,6 +1,5 @@
 use std::fs::File;
 
-
 use crate::global::LARGE_TEXT;
 
 // nodeを表現
@@ -12,6 +11,8 @@ pub trait Node {
     fn label(&self) -> &str;
 
     fn image_path(&self) -> &str;
+
+    fn id(&self) -> &str;
 }
 
 pub struct Diagram {
@@ -29,13 +30,12 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Diagram {
     }
     fn node_label<'b>(&'b self, n: &Nd<'b>) -> dot::LabelText<'b> {
         let &(i, (_, _)) = n; // nodeのIDとlistの順番が同じ前提
-        // dot::LabelText::LabelStr(self.nodes[i].image_path().into())
+                              // dot::LabelText::LabelStr(self.nodes[i].image_path().into())
         let mut absolute_image_path = String::new();
         absolute_image_path.push_str(LARGE_TEXT.as_str());
         absolute_image_path.push_str("/");
         absolute_image_path.push_str(self.nodes[i].image_path());
-        let html_string =
-            build_html_string(absolute_image_path.as_str(), self.nodes[i].label());
+        let html_string = build_html_string(absolute_image_path.as_str(), self.nodes[i].label());
         dot::LabelText::HtmlStr(html_string.into())
     }
     fn edge_label<'b>(&'b self, _: &Ed<'b>) -> dot::LabelText<'b> {
@@ -86,4 +86,6 @@ impl Diagram {
         let mut f = File::create(file_name).unwrap();
         dot::render(self, &mut f).unwrap()
     }
+
+    pub fn connect(&self, src_node: &dyn Node, target_node: &dyn Node) {}
 }

@@ -22,4 +22,8 @@ impl Node for Ecs<'_> {
     fn image_path(&self) -> &str {
         self.path
     }
+
+    fn id(&self) -> &str {
+        todo!()
+    }
 }
