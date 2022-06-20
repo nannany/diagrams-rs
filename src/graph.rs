@@ -12,7 +12,7 @@ pub trait Node {
 
     fn image_path(&self) -> &str;
 
-    fn id(&self) -> &str;
+    fn id(&self) -> u32;
 }
 
 pub struct Diagram {
