@@ -37,3 +37,15 @@ impl Node for Alb<'_> {
         self.id
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::aws::alb::Alb;
+
+    #[test]
+    fn check_global_id() {
+        let alb_1 = Alb::new("label1");
+        let alb_2 = Alb::new("label2");
+        assert_eq!(alb_1.id + 1, alb_2.id);
+    }
+}
