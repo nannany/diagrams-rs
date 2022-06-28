@@ -68,11 +68,13 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Diagram {
                     self.nodes
                         .iter()
                         .find(|&node| node.id() == i)
-                        .map(|&node| (node.id(), (*node.label(), *node.image_path()))),
+                        .map(|node| (node.id(), (node.label(), node.image_path())))
+                        .unwrap(),
                     self.nodes
                         .iter()
                         .find(|&node| node.id() == j)
-                        .map(|&node| (node.id(), (*node.label(), *node.image_path()))),
+                        .map(|node| (node.id(), (node.label(), node.image_path())))
+                        .unwrap(),
                 )
             })
             .collect()
