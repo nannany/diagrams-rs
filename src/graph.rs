@@ -20,7 +20,7 @@ pub struct Diagram {
     pub edges: Vec<(u32, u32)>,
 }
 
-/// 識別子を振ったり、ラベルを貼り付けたりするLabellerを実装
+/// Identify and label
 impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Diagram {
     fn graph_id(&'a self) -> dot::Id<'a> {
         dot::Id::new("my_graph").unwrap()
