@@ -94,5 +94,16 @@ impl Diagram {
         dot::render(self, &mut f).unwrap()
     }
 
-    pub fn connect(&self, src_node: &dyn Node, target_node: &dyn Node) {}
+    pub fn connect(&mut self, src_node: &dyn Node, target_node: &dyn Node) {
+        self.nodes.push(Box::new(src_node));
+        self.nodes.push(Box::new(target_node));
+        self.edges.push((src_node.id(), target_node.id()))
+    }
+
+    pub fn new() -> Diagram {
+        Diagram {
+            nodes: vec![],
+            edges: vec![],
+        }
+    }
 }
