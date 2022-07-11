@@ -15,13 +15,13 @@ pub trait Node {
     fn id(&self) -> u32;
 }
 
-pub struct Diagram {
-    pub nodes: Vec<Box<dyn Node>>,
+pub struct Diagram<'a> {
+    pub nodes: Vec<&'a dyn Node>,
     pub edges: Vec<(u32, u32)>,
 }
 
 /// Identify and label
-impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Diagram {
+impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Diagram<'_> {
     fn graph_id(&'a self) -> dot::Id<'a> {
         dot::Id::new("my_graph").unwrap()
     }
@@ -51,7 +51,7 @@ fn build_html_string(path: &str, text: &str) -> String {
 }
 
 /// Implement GraphWalk required to understand the relationship between node and edge location
-impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Diagram {
+impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Diagram<'_> {
     // impl dot::Nodes which lists nodes
     fn nodes(&'a self) -> dot::Nodes<'a, Nd<'a>> {
         self.nodes
@@ -88,19 +88,19 @@ impl<'a> dot::GraphWalk<'a, Nd<'a>, Ed<'a>> for Diagram {
     }
 }
 
-impl Diagram {
+impl<'a> Diagram<'a> {
     pub fn render_to(&self, file_name: &str) {
         let mut f = File::create(file_name).unwrap();
         dot::render(self, &mut f).unwrap()
     }
 
-    pub fn connect(&mut self, src_node: &dyn Node, target_node: &dyn Node) {
-        self.nodes.push(Box::new(src_node));
-        self.nodes.push(Box::new(target_node));
+    pub fn connect(&mut self, src_node: &'a (dyn Node + 'a), target_node: &'a (dyn Node + 'a)) {
+        self.nodes.push(src_node);
+        self.nodes.push(target_node);
         self.edges.push((src_node.id(), target_node.id()))
     }
 
-    pub fn new() -> Diagram {
+    pub fn new() -> Diagram<'static> {
         Diagram {
             nodes: vec![],
             edges: vec![],
