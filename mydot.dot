@@ -1,10 +1,5 @@
 digraph my_graph {
-    N0[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD><TD>aaa</TD></TR></TABLE>>];
-    N1[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/elastic-container-service.png"/></TD><TD>bbb</TD></TR></TABLE>>];
-    N2[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD><TD>ccc</TD></TR></TABLE>>];
-    N3[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD><TD>ddd</TD></TR></TABLE>>];
-    N0 -> N1[label="edge"];
-    N0 -> N2[label="edge"];
-    N1 -> N3[label="edge"];
-    N2 -> N3[label="edge"];
+    N1[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD><TD>abc</TD></TR></TABLE>>];
+    N2[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD><TD>dce</TD></TR></TABLE>>];
+    N1 -> N2[label="edge"];
 }

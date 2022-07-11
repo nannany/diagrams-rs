@@ -23,7 +23,7 @@ impl Node for Ecs<'_> {
         self.path
     }
 
-    fn id(&self) -> &str {
+    fn id(&self) -> u32 {
         todo!()
     }
 }
