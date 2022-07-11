@@ -1,5 +1,5 @@
 digraph my_graph {
     N1[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD><TD>abc</TD></TR></TABLE>>];
-    N2[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD><TD>dce</TD></TR></TABLE>>];
+    N2[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/elastic-container-service.png"/></TD><TD>dce</TD></TR></TABLE>>];
     N1 -> N2[label="edge"];
 }

@@ -29,7 +29,7 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Diagram<'_> {
         dot::Id::new(format!("N{}", n.0)).unwrap()
     }
     fn node_label<'b>(&'b self, n: &Nd<'b>) -> dot::LabelText<'b> {
-        let &(i, (label, image_path)) = n; // nodeのIDとlistの順番が同じ前提
+        let &(_, (label, image_path)) = n; // nodeのIDとlistの順番が同じ前提
                                            // dot::LabelText::LabelStr(self.nodes[i].image_path().into())
         let mut absolute_image_path = String::new();
         absolute_image_path.push_str(LARGE_TEXT.as_str());

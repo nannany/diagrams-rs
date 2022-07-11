@@ -1,12 +1,12 @@
 use diagrams_rs::aws::alb::Alb;
 use diagrams_rs::aws::ecs::Ecs;
-use diagrams_rs::graph::{Diagram, Node};
+use diagrams_rs::graph::Diagram;
 
 fn main() {
     let mut diagram = Diagram::new();
 
     let alb1 = Alb::new("abc");
-    let alb2 = Alb::new("dce");
+    let alb2 = Ecs::new("dce");
 
     diagram.connect(&alb1, &alb2);
 
