@@ -45,7 +45,7 @@ impl<'a> dot::Labeller<'a, Nd<'a>, Ed<'a>> for Diagram<'_> {
 
 fn build_html_string(path: &str, text: &str) -> String {
     format!(
-        "<TABLE><TR><TD><IMG SRC=\"{}\"/></TD><TD>{}</TD></TR></TABLE>",
+        "<TABLE><TR><TD><IMG SRC=\"{}\"/></TD></TR><TR><TD>{}</TD></TR></TABLE>",
         path, text
     )
 }
