@@ -1,5 +1,26 @@
 digraph my_graph {
-    N1[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD></TR><TR><TD>abc</TD></TR></TABLE>>];
-    N2[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/elastic-container-service.png"/></TD></TR><TR><TD>dce</TD></TR></TABLE>>];
+    N1[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD></TR><TR><TD>lb</TD></TR></TABLE>>];
+    N2[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/ec2.png"/></TD></TR><TR><TD>worker1</TD></TR></TABLE>>];
+    N1[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD></TR><TR><TD>lb</TD></TR></TABLE>>];
+    N3[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/ec2.png"/></TD></TR><TR><TD>worker2</TD></TR></TABLE>>];
+    N1[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD></TR><TR><TD>lb</TD></TR></TABLE>>];
+    N4[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/ec2.png"/></TD></TR><TR><TD>worker3</TD></TR></TABLE>>];
+    N1[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/network/elb-application-load-balancer.png"/></TD></TR><TR><TD>lb</TD></TR></TABLE>>];
+    N5[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/ec2.png"/></TD></TR><TR><TD>worker4</TD></TR></TABLE>>];
+    N2[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/ec2.png"/></TD></TR><TR><TD>worker1</TD></TR></TABLE>>];
+    N6[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/database/rds.png"/></TD></TR><TR><TD>Grouped Workers</TD></TR></TABLE>>];
+    N3[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/ec2.png"/></TD></TR><TR><TD>worker2</TD></TR></TABLE>>];
+    N6[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/database/rds.png"/></TD></TR><TR><TD>Grouped Workers</TD></TR></TABLE>>];
+    N4[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/ec2.png"/></TD></TR><TR><TD>worker3</TD></TR></TABLE>>];
+    N6[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/database/rds.png"/></TD></TR><TR><TD>Grouped Workers</TD></TR></TABLE>>];
+    N5[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/compute/ec2.png"/></TD></TR><TR><TD>worker4</TD></TR></TABLE>>];
+    N6[label=<<TABLE><TR><TD><IMG SRC="/Users/nannany/ghq/github.com/nannany/diagrams-rs/assets/aws/database/rds.png"/></TD></TR><TR><TD>Grouped Workers</TD></TR></TABLE>>];
     N1 -> N2[label="edge"];
+    N1 -> N3[label="edge"];
+    N1 -> N4[label="edge"];
+    N1 -> N5[label="edge"];
+    N2 -> N6[label="edge"];
+    N3 -> N6[label="edge"];
+    N4 -> N6[label="edge"];
+    N5 -> N6[label="edge"];
 }
